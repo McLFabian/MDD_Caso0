@@ -2,7 +2,7 @@
 <html>
 
 <head>
-	<title>Pokedex BDD 2014</title>
+	<title>SIGEM - Sistema de gestión de naves marcianas</title>
 	<meta "charset=iso-8859-1" />
 	<link href="css/style.css" rel="stylesheet" type="text/css" />
 </head>
@@ -13,10 +13,10 @@
 	           		<a href="index.php" id="logo"><img src="images/logo.gif" width="310" height="114" alt="" title=""></a>
 					<ul class="navigation">
 						<li class="active"><a href="index.php">Home</a></li>
-						<li class="active"><a href="pokedex.php">Pokedex</a></li>
-						<li class="active"><a href="regiones.php">Regiones</a></li>
-						<li class="active"><a href="about.php">Sobre</a></li>
-						<li class="active"><a href="contact.php">Contacta</a></li>
+						<li class="active"><a href="gestion_naves.php">Naves</a></li>
+						<li class="active"><a href="gestion_pasajeros.php">Pasajeros</a></li>
+						<li class="active"><a href="revisar_aeronave.php">Revisión</a></li>
+						<li class="active"><a href="contact.php">Contacto</a></li>
 					</ul>
 			</div>
 			
