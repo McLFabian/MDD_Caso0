@@ -10,7 +10,7 @@
 <body>
 
 			<div id="header">
-	           		<a href="index.php" id="logo"><img src="images/logo.gif" width="310" height="114" alt="" title=""></a>
+	           		<a href="index.php" id="logo"><img src="images/logo.jpg" width="310" height="72" alt="" title=""></a>
 					<ul class="navigation">
 						<li class="active"><a href="index.php">Home</a></li>
 						<li class="active"><a href="gestion_naves.php">Naves</a></li>
@@ -29,48 +29,37 @@
 				        <div class="content">
 								<ul>
 									<li>
-										<a href="pokedex.php"><img src="images/index-pokedex.png" width="114" height="160" alt="Pokedex" title="Pokedex"></a>
-										<h2>Tu fuente de informacion Pokemon</h2>
-										<p>Averigua mas sobre estas criaturas. Sientete inmerso!.<a class="more" href="pokedex.php">Vamos!</a></p>
+										<a href="gestion_naves.php"><img src="images/index-nave.png" width="130" height="160" alt="Naves" title="Naves"></a>
+										<h2>Gestión de naves</h2>
+										<p>Sección dedicada a la creación de naves nodriza y aeronaves de transporte.<a class="more" href="gestion_naves.php">Click aquí</a></p>
 									</li>
 									<li>
-										<a href="regiones.php"><img src="images/index-region.png" width="114" height="160" alt="Pokedex" title="Regiones"></a>
-										<h2>Conoce las Regiones</h2>
-										<p>El mundo real es enorme... y el de Pokemon tambien!, descubre sus distintas geografias. <a class="more" href="regiones.php">Descubre!</a></p>
+										<a href="gestion_pasajeros.php"><img src="images/index-pasajeros.png" width="151" height="160" alt="Pasajeros" title="Pasajeros"></a>
+										<h2>Gestión de pasajeros</h2>
+										<p>Sección dedicada al registro de subida y bajada de pasajeros de sus respectivos vuelos. <a class="more" href="gestion_pasajeros.php">Click aquí</a></p>
 									</li>
 									<li>
-										<a href="about.php"><img src="images/index-about.jpg" width="114" height="160" alt="Pokedex" title="Sobre"></a>
-										<h2>Algo mas...</h2>
-										<p>Enterate mas sobre como nace esto.<a class="more" href="about.php">Sigue!</a></p>
+										<a href="revisar_aeronave.php"><img src="images/index-revisar.png" width="130" height="160" alt="Revisar aeronave" title="Revisar aeronave"></a>
+										<h2>Revisión de aeronaves</h2>
+										<p>Sección dedicada a la fiscalización del pago de pasajes en cada vuelo de forma diaria.<a class="more" href="revisar_aeronave.php">Click aquí</a></p>
 									</li>
 									<li>
-										<a href="contact.php"><img src="images/index-contact.png" width="114" height="160" alt="Pokedex" title="Contacto"></a>
-										<h2>Contacta!</h2>
-										<p>Si te interesa el proyecto, no dudes en escribir!.<a class="more" href="contact.php">Escribe!</a></p>
+										<a href="contact.php"><img src="images/index-contact.png" width="151" height="160" alt="Contacto" title="Contacto"></a>
+										<h2>Contáctenos</h2>
+										<p>Si le interesa este proyecto, no dude en escribir.<a class="more" href="contact.php"> Continuar</a></p>
 									</li>
 								</ul>
 						</div>
 						
 					    <div id="sidebar">
-					    	<p>Busca tu Pokemon!</p>
-								<div class="search">
-									<form action="pokedex2.php" method="post"/>
-										<input type="text" name="nombre" value="nombre">
-										<input type="submit" name="buscar1" value="Buscar1">
-									</form>
-								</div>
+    						<p><img src="images/index-sidebar.png" width="320" height="350" alt="Sidebar" title="Sidebar"></p>
 					    </div>
 				   	</div>
 				   
 				   	<div class="featured">
 					<ul>
-						<li><img src="images/sprites/pidgeotto.gif" height="80"></a></li>
-						<li><img src="images/sprites/ponyta.gif" height="113"></a></li>
-						<li><img src="images/sprites/exploud.gif" height="110"></a></li>
-						<li><img src="images/sprites/meowstic.gif" height="110"></a></li>
-						<li><img src="images/sprites/lairon.gif" height="110"></a></li>
-						<li><img src="images/sprites/kyurem.gif" height="110"></a></li>
-						<li><img src="images/sprites/wobbuffet.gif" height="113"></a></li>
+
+
 					</ul>
 
 			</div>
@@ -78,7 +67,7 @@
 			<div id="footer">
 					<div id="footnote">
 						<div class="section">
-						   &copy; 2014 <a href="index.html">Pokemon pertenece a The Pokemon Company</a>. Todos los derechos reservados.
+						   &copy; 2017 <a href="index.html">Daniel Méndez & Fabián Miranda Muñoz</a>. Todos los derechos reservados.
 						</div>
 					</div>
 			</div>
