@@ -85,45 +85,7 @@
   <button type="submit" value="Crear_Aeronave" onClick="comprobarNodrizas()" class="btn btn-default">Crear</button>
 </form>
 
-						</li>
-
-						<li>
-							<div>
-								<span>Nave</span> 
-								<h2>Crear aeronave</h2>  
-							</div>
-							<p><img src="images/gestion-estrellas2.jpg" width="300" height="210" alt="Naves" title="Naves"></p>
-							<p>
-								Este apartado está dedicado para el registro de naves nodriza que se vayan agregando al sistema de transporte espacial SIGEM. A continuación se requerirá, como en el anterior apartado, ingresar los siguientes datos para proseguir con la exitosa creación del registro.</a>
-							</p>
-
-							<form action="crear_aeronave.php" method="post"> 
-								<table align="center" bgcolor="orange" border="2"> 
-								<tbody> 
-								<tr> 
-								<td align="right">ID Aeronave:</td> 
-								<td align="left"> <input name="id_aeronave" value="" size="20" type="text"></td> 
-								<td align="right">Nombre Aeronave:</td>
-								<td align="left"> <input name="nombre_aeronave" value="" size="20" type="text"></td>
-								</tr>
-								<tr>
-								<td align="right">Nodriza origen: </td>
-								<td align="left"> <input name="nodriza_origen" value="" size="20" type="text"></td>
-								<td align="right">Nodriza destino:</td> 
-								<td align="left"> <input name="nodriza_destino" value="" size="20" type="text"></td> 
-								</tr>
-								<tr>
-								<td align="right">Máximo de pasajeros:</td> 
-								<td align="left"> <input name="max_aeronave" value="" size="20" type="number" placeholder="1"/></td> 
-								</tr>
-
-								<tr> 
-								<td align="center"><input value="Enviar" type="submit"></td> 
-								<td align="center"><input value="Borrar" type="reset"></td> 
-								</tr> 
-								</tbody> 
-								</table> 
-							</form> 
+						
 
 						</li>
 							
