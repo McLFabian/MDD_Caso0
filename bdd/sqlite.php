@@ -234,6 +234,22 @@ class Usuarios{
     }
 }
 
+class Revision{
+  var $DB;
+    function conn(){
+        $this->DB= db_connect();
+      }
+
+function insert($nombre, $id_nave, $id_rev){
+    $fecha = date_create();
+    $query =  $this->DB->exec("INSERT INTO revision(id, nombreRevisor, idNaveRevisada,fechaHoraRevision) VALUES ($id_rev, $nombre, $$id_nave, $fecha");
+        if (!$query) {
+            die("Database transaction failed: " . $this->DB->lastErrorMsg() );
+        }
+    $this->DB->close();
+  }
+}
+
 
 /**
 * @Modelo para tabla Aeronave
@@ -460,28 +476,49 @@ class Aeronave{
             //$result = $this->DB->query("select * from aeronave order by id_nave_origen;");          
 			$result = $this->DB->query("select aeronave.id as id, limite_pasajeros, a.nombre as origen, b.nombre as destino, fecha_origen, fecha_destino from aeronave JOIN nave_nodriza as a ON id_nave_origen = a.id JOIN nave_nodriza as b ON id_nave_destino = b.id order by aeronave.id;");          
 			
-			echo "<center><table style=\"width:600px\" class=\"table table-striped\">";
-		    echo "<tr><td><b> Nombre </b></td> <td><b> Capacidad </b> <td><b>Origen</b></td> <td><b>Destino</b></td> <td><b> Fecha de origen </b> <td><b> Fecha de llegada</b> </td></tr> ";
+			echo "<table style=\"width:600px\" class=\"table table-striped\">";
+		    echo "<tr><td><b> Nombre </b></td> <td><b> Cantidad máxima </b> <td><b>Origen</b></td> <td><b>Destino</b></td> </tr> ";
 		    while ($res = $result->fetchArray(SQLITE3_ASSOC)){
 			$id = $res['id'];
 			$capacidad = $res['limite_pasajeros'];
-			$fecha_origen = $res['fecha_origen'];
-			$fecha_destino = $res['fecha_destino'];
 			$origen = $res['origen'];
 			$destino = $res['destino'];
 			
 			
 			echo "<tr>";
-			echo "<td><a href='ver_aeronave.php?id=$id'>Nave $id </a></td>"; 
+			echo "<td> Nave $id </a></td>"; 
 			echo "<td> $capacidad </td>";
 			echo "<td> $origen </td>";
 			echo "<td> $destino </td>";
-			echo "<td> $fecha_origen </td>";
-			echo "<td> $fecha_destino </td>";
 			echo "</tr>";
 		    }
-	   	    echo "</table></center>";		
+	   	    echo "</table>";		
 			
+        }
+        catch (Exception $e){
+            echo $e->getMessage();
+        }
+    $this->DB->close();
+  }    
+
+  function listar_aeronave2(){
+        try{
+            $result = $this->DB->query("select * from aeronave order by id_nave_origen;");          
+     // $result = $this->DB->query("select * from revision, aeronave where aeronave.id != revision.idNaveRevisada;");          
+      
+      echo "<table style=\"width:600px\" class=\"table table-striped\">";
+        echo "<tr><td><b> Nombre </b></td> <td><b>Revisar</b></td> </tr> ";
+        while ($res = $result->fetchArray(SQLITE3_ASSOC)){
+      $id = $res['id'];
+   
+      
+      echo "<tr>";
+      echo "<td> Nave $id </a></td>"; 
+      echo "<td> <a href=crearRevision.php?id=$id>Revisar aeronave</a></td>";
+      echo "</tr>";
+        }
+          echo "</table>";    
+      
         }
         catch (Exception $e){
             echo $e->getMessage();
@@ -560,8 +597,8 @@ class Aeronave{
   }
   
   
-  function insert($limite_pasajeros, $id_nave_origen, $id_nave_destino, $id_estado, $fecha_origen, $fecha_destino){
-    $query =  $this->DB->exec("INSERT INTO aeronave(limite_pasajeros, id_nave_origen, id_nave_destino, id_estado, fecha_origen, fecha_destino) VALUES ($limite_pasajeros, $id_nave_origen, $id_nave_destino, $id_estado, '$fecha_origen', '$fecha_destino');");
+  function insert($id,$limite_pasajeros, $id_nave_origen, $id_nave_destino, $id_estado, $fecha_origen, $fecha_destino){
+    $query =  $this->DB->exec("INSERT INTO aeronave(id, limite_pasajeros, id_nave_origen, id_nave_destino, id_estado, fecha_origen, fecha_destino) VALUES ($id,$limite_pasajeros, $id_nave_origen, $id_nave_destino, $id_estado, '$fecha_origen', '$fecha_destino');");
         if (!$query) {
             die("Database transaction failed: " . $this->DB->lastErrorMsg() );
         }
@@ -646,7 +683,7 @@ class Aeronave{
 	    echo "<td>".$res['id']."</td>";
 	    echo "<td>".$res['id_nave']."</td>";
 	    echo "<td>".$res['fecha']."</td>";
-	    echo "<td><a href=\"ver_historico.php?&file=".$res['file']."\" class=\"btn btn-primary\" role=\"button\">Ver Registro</a></td>";
+	    echo "<td><a href=\"ver_historico.php?&file=".$res['file']."\" class=\"btn btn-primary\" role=\"button\" disabled>Ver Registro</a></td>";
 	   echo "<tr>";
         }
         echo "</table>";
@@ -906,49 +943,47 @@ class NaveNodriza{
     //Lista de naves nodrizas
     function get_listar($type){
         try{
-          $result = $this->DB->query("select * from nave_nodriza order by id;");
-          if($type == "1"){ //TABLE
-	          echo "<center><table style=\"width:650px\" class=\"table table-striped\">";
-		        echo "<tr><td><b> ID </b></td> <td><b> Nave Nodriza</b> </td><td><b>Ver</b></td></tr> ";
-		        while ($res = $result->fetchArray(SQLITE3_ASSOC)){
-			        $id = $res['id'];
-      		    $nombre = $res['nombre'];
-              // Inserta en el PHP el código necesario para mostrar
-      		    echo "<tr>";
-      		    echo "<td><a href='ver_nodriza.php?id=$id'> $id </a></td>"; //link a la vista de la nave nod..
-      		    echo "<td> $nombre</td>";
-              echo "<td><a href=\"ver_nodriza.php?id=$id\" class=\"btn btn-primary\" role=\"button\">Ver</a></td>";
-      		    echo "</tr>";
-		        }
-	   	      echo "</table></center>";
-	        }
-    	    if($type == "2"){ //SELECT
-    		    echo "<select name='origen'>";
-    		    while ($res = $result->fetchArray(SQLITE3_ASSOC)){
-    			   $id = $res['id'];
-    			   $nombre = $res['nombre'];
+            $result = $this->DB->query("select * from nave_nodriza order by id;");
+           if($type == "1"){ //TABLE
+	        echo "<table style=\"width:650px\" class=\"table table-striped\">";
+		    echo "<tr><td><b> ID </b></td> <td><b> Nombre</b> </td></tr> ";
+		    while ($res = $result->fetchArray(SQLITE3_ASSOC)){
+			$id = $res['id'];
+			$nombre = $res['nombre'];
+			echo "<tr>";
+			echo "<td>$id</td>"; //link a la vista de la nave nod..
+			echo "<td> $nombre</td>";
+			echo "</tr>";
+		    }
+	   	    echo "</table>";
+	     }
+	    if($type == "2"){ //SELECT
+		    echo "<select name='origen'>";
+		    while ($res = $result->fetchArray(SQLITE3_ASSOC)){
+			$id = $res['id'];
+			$nombre = $res['nombre'];
 
-    			   echo "<option value='$id'>$nombre</option>";
-    		    }
-    		    echo "</select>";
-          }
-    	    if($type == "3"){ //SELECT
-    		    echo "<select name='destino'>";
-    		    while ($res = $result->fetchArray(SQLITE3_ASSOC)){
-    			   $id = $res['id'];
-    			   $nombre = $res['nombre'];
+			echo "<option value='$id'>$nombre</option>";
+		    }
+		    echo "</select>";
+           }
+	    if($type == "3"){ //SELECT
+		    echo "<select name='destino'>";
+		    while ($res = $result->fetchArray(SQLITE3_ASSOC)){
+			$id = $res['id'];
+			$nombre = $res['nombre'];
 
-    			   echo "<option value='$id'>$nombre</option>";
-    		    }
-    		    echo "</select>";
-          }
+			echo "<option value='$id'>$nombre</option>";
+		    }
+		    echo "</select>";
+           }
 
         }
         catch (Exception $e){
             echo $e->getMessage();
         }
     $this->DB->close();
-    }
+  }
 
     //Nombre de la nave nodriza
     function get_nombre($id){
@@ -1194,39 +1229,23 @@ class Pasajero{
 	    $query="select * from pasajero order by id DESC;";
             $result = $this->DB->query($query);         
 			
-		echo "<center><table style=\"width:650px\" class=\"table table-striped\">";
-		echo "<tr><td><b> ID </b></td> <td><b> Nombre</b> </td><td><b>Nave</b></td><td><b>Tipo Nave</b></td><td><b>Ticket</b></td><td><b>Borrar</b></td><td><b>Tomar Vuelo</b></td></tr> ";
+		echo "<table style=\"width:650px\" class=\"table table-striped\">";
+		echo "<tr><td><b> ID </b></td> <td><b> Nombre</b> </td><td><b>Nave</b></td><td><b>Borrar</b></td><td><b>Tomar Vuelo</b></td></tr> ";
 		while ($res = $result->fetchArray(SQLITE3_ASSOC)){
 		
 			echo "<tr>";
 			echo "<td>".$res['id']." </td>"; 
 			echo "<td>".$res['nombre']."</td>";
 			echo "<td><a href='ver_aeronave.php?id=".$res['id_nave']."'>".$res['id_nave']."</a></td>";
-			
-		
+
+			echo "<td><a href=\"del_pasajero.php?&id=".$res['id']."\" class=\"btn btn-danger\" role=\"button\">Desbordar</a></td>";
 			if($res['tipo_nave']==0){
-			  echo "<td>Nodriza - ";
-		
-			  $result2 = $this->DB->query("select nombre from nave_nodriza where id=".$res['id_nave'].";");
-			  if ($res2 = $result2->fetchArray(SQLITE3_ASSOC)){
-			    echo $res2['nombre'];
-			  }
-		
-			  echo "</td>";
-			}
-			if($res['tipo_nave']==1){
-			  echo "<td>Aeronave</td>";
-			}
-		
-			echo "<td>".$res['ticket']."</td>";
-			echo "<td><a href=\"del_pasajero.php?&id=".$res['id']."\" class=\"btn btn-danger\" role=\"button\">Borrar</a></td>";
-			if($res['tipo_nave']==0){
-			 echo "<td><a href=\"tomar_vuelo.php?id=".$res['id_nave']."&pj=".$res['id']."\" class=\"btn btn-default\" role=\"button\">Tomar Vuelo</a></td>";
+			 echo "<td><a href=\"tomar_vuelo.php?id=".$res['id_nave']."&pj=".$res['id']."\" class=\"btn btn-default\" role=\"button\">Abordar</a></td>";
 			}
 			echo "</tr>";
 		
 		}
-	        echo "</table></center>";		
+	        echo "</table>";		
         }
         catch (Exception $e){
             echo $e->getMessage();
