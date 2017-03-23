@@ -79,7 +79,7 @@
 								</tr>
 								<tr>
 								<td align="right">Máximo de pasajeros:</td> 
-								<td align="left"> <input name="max_aeronave" value="" size="20" type="number"></td> 
+								<td align="left"> <input name="max_aeronave" value="" size="20" type="number" placeholder="1"/></td> 
 								</tr>
 
 								<tr> 
