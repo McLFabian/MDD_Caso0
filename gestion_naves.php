@@ -33,7 +33,7 @@
 								<span>Nodriza</span> 
 								<h2>Crear Nave nodriza</h2>  
 							</div>
-							<p><img src="images/gestion-nodrizas.jpg" width="300" height="229" alt="Nodrizas" title="Nodrizas"></p>
+							<p><img src="images/gestion-estrellas1.jpg" width="300" height="160" alt="Nodrizas" title="Nodrizas"></p>
 							<p>
 								Este apartado está dedicado para el registro de nuevas naves para el transporte de pasajeros espaciales. A continuación se requerirá ingresar los siguientes datos para proseguir con la exitosa creación del registro.</a>
 							</p>
@@ -57,9 +57,9 @@
 								<span>Nave</span> 
 								<h2>Crear aeronave</h2>  
 							</div>
-							<p><img src="images/gestion-naves.jpg" width="300" height="197" alt="Naves" title="Naves"></p>
+							<p><img src="images/gestion-estrellas2.jpg" width="300" height="210" alt="Naves" title="Naves"></p>
 							<p>
-								Este apartado está dedicado para el registro de nuevas naves para el transporte de pasajeros espaciales. A continuación se requerirá ingresar los siguientes datos para proseguir con la exitosa creación del registro.</a>
+								Este apartado está dedicado para el registro de naves nodriza que se vayan agregando al sistema de transporte espacial SIGEM. A continuación se requerirá, como en el anterior apartado, ingresar los siguientes datos para proseguir con la exitosa creación del registro.</a>
 							</p>
 
 							<form action="crear_aeronave.php" method="post"> 
@@ -97,8 +97,8 @@
 				</div>
 
 				<div id="sidebar">
-					<p><img src="images/gestion-nodriza.jpg" height="450" alt="Serena" title="Serena"></p>
-					<p><img src="images/gestion-nave.jpg" height="283" alt="Blue" title="Blue"></p>
+					<p><img src="images/gestion-nodriza.jpg" height="450" alt="Nodriza" title="Nodriza"></p>
+					<p><img src="images/gestion-nave.jpg" height="283" alt="Nave" title="Nave"></p>
 				</div>
 					
 			</div>
