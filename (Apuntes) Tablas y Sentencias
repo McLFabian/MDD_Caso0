@@ -1,0 +1,92 @@
+Base de Datos Pokémon
+
+Tablas:
+-Regiones (id PK, nombre)  // CREATE TABLE Regiones ( id INT NOT NULL AUTO_INCREMENT PRIMARY KEY, nombre VARCHAR(10));
+-Rutas (id, region FK(Regiones.id)) // CREATE TABLE Rutas ( id INT NOT NULL AUTO_INCREMENT PRIMARY KEY, region INT NOT NULL, FOREIGN KEY (region) REFERENCES Regiones(id));
+-Lugares_pkmn (id_pkmn FK(Pokemon.id), id_ruta FK(Rutas.id)) // CREATE TABLE Lugares_pkmn (id_pkmn INT NOT NULL, id_ruta INT NOT NULL, FOREIGN KEY (id_pkmn) REFERENCES Pokemon(id), FOREIGN KEY (id_ruta) REFERENCES Rutas(id));
+-Ataques (id, nombre, tipo, potencia, info) // CREATE TABLE Ataques ( id INT NOT NULL AUTO_INCREMENT PRIMARY KEY, nombre VARCHAR(10) NOT NULL, tipo VARCHAR(10), potencia INT);
+-Ataques_pkmn (id_pkmn FK(Pokemon.id), id_atk(FK Ataques.id)) // CREATE TABLE Ataques_pkmn (id_pkmn INT NOT NULL, id_atk INT NOT NULL, FOREIGN KEY (id_pkmn) REFERENCES Pokemon(id), FOREIGN KEY (id_atk) REFERENCES Ataques(id));
+-Pokemon (id PK, nombre, tipo, altura) // CREATE TABLE Pokemon ( id INT NOT NULL AUTO_INCREMENT PRIMARY KEY, nombre VARCHAR(20) NOT NULL, tipo VARCHAR(10) NOT NULL, altura INT NOT NULL);
+
+sentencias:
+1.- Insert
+-Insertar Region: INSERT INTO Regiones (id, nombre) VALUES ($id, '$nombre');
+-Insertar Ruta: INSERT INTO Rutas (id, region) VALUES ($id, $region);
+-Insertar Ataques: INSERT INTO Ataques (nombre, tipo, potencia) VALUES ('$nombre','$tipo', $potencia); o INSERT INTO Ataques (nombre, tipo) VALUES ('$nombre','$tipo');
+-Insertar Pokemon: INSERT INTO Pokemon (id, nombre, tipo, altura) VALUES ($id, '$nombre', '$tipo', $altura);
+-Insertar Lugares_pkmn: INSERT INTO Lugares_pkmn (id_pkmn, id_ruta) VALUES ($id_pkmn, $id_ruta);
+-Insertar Ataques_pkmn: INSERT INTO Ataques_pkmn (id_pkmn, id_atk) VALUES ($id_pkmn, $id_atk);
+
+2.- Update
+-UPDATE Regiones SET nombre='$nombre' WHERE id=$id;
+-UPDATE Rutas SET region=$region WHERE id=$id;
+-UPDATE Ataques SET nombre='$nombre', tipo='$tipo', potencia=$potencia WHERE id=$id;
+-UPDATE Pokemon SET nombre='$new_nombre', tipo='$tipo', altura=$altura WHERE nombre=$nombre;
+-UPDATE Lugares_pkmn SET id_ruta='$new_id_ruta' WHERE id_pkmn=$id_pkmn AND id_ruta=$id_ruta;
+-UPDATE Ataques_pkmn SET id_atk='$new_id_atk' WHERE id_pkmn=$id_pkmn AND id_atk=$id_atk;
+
+3.- Select
+-el pokemon más grande: SELECT id FROM Pokemon WHERE Pokemon.altura=MAX(Pokemon.altura);
+-el pokemon más chico: SELECT id FROM Pokemon WHERE Pokemon.altura=MIN(Pokemon.altura);
+-el pokemon que en más regiones existe: 
+-el pokemon con menos ataques:
+-pokemon por búsqueda simple (por nombre): SELECT id FROM Pokemon WHERE nombre='$nombre';
+-pokemon por búsqueda detallada: SELECT Pokemon.id FROM Pokemon, Lugares_pkmn, Rutas, Regiones WHERE 
+
+4.- Delete
+-eliminar ataque de un Pokemon: DELETE FROM Ataques_pkmn WHERE id_pkmn=$id_pkmn AND id_atk=$id_atk;
+-eliminar habitat de un Pokemon: DELETE FROM Lugares_pkmn WHERE id_pkmn=$id_pkmn AND ind_ruta=$id_ruta;
+-eliminar una Ruta:
+	DELETE FROM Lugares_pkmn WHERE id_ruta=$id
+	DELETE FROM Rutas WHERE id=$id;
+-eliminar una Region:
+-eliminar un Ataque: 	
+	DELETE FROM Ataques_pkmn WHERE  id_atk=$id
+	DELETE FROM Ataques WHERE id=$id;
+-eliminar un Pokemon:  DELETE FROM Pokemon WHERE  id=$id;
+
+P.S.
+
+CREAR BASE:
+
+fabian@Fabian-NETBOOK:~$ mysql -u root -p
+Enter password: 
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 7
+Server version: 5.6.21 MySQL Community Server (GPL)
+
+Copyright (c) 2000, 2014, Oracle and/or its affiliates. All rights reserved.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> create database pokedexudp
+    -> ;
+Query OK, 1 row affected (0,14 sec)
+
+mysql> grant usage on *.* to fabian@localhost identified by '1EgalWohin';
+Query OK, 0 rows affected (0,05 sec)
+
+mysql> grant all privileges on pokedexudp.* to fabian@localhost;
+Query OK, 0 rows affected (0,03 sec)
+
+mysql> quit
+Bye
+fabian@Fabian-NETBOOK:~$ mysql -u fabian -p'1EgalWohin' pokedexudp
+Warning: Using a password on the command line interface can be insecure.
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 8
+Server version: 5.6.21 MySQL Community Server (GPL)
+
+Copyright (c) 2000, 2014, Oracle and/or its affiliates. All rights reserved.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql>
